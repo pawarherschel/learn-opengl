@@ -1,0 +1,7 @@
+﻿.idea
+.vs
+.zig-cache
+cmake-build-debug-visual-studio
+zig-out
+x64
+Libraries/glfw-3.4
