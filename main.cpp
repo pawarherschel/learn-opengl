@@ -14,9 +14,6 @@ namespace
     auto framebuffer_size_callback(GLFWwindow * /*window*/, const int32_t width,
                                    const int32_t height) -> void
     {
-        assert(width > 0);
-        assert(height > 0);
-
         std::cout << "resizing viewport to width " << width << " height " << height
             << '\n';
         glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
