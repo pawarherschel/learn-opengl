@@ -11,8 +11,8 @@
 
 namespace
 {
-    void framebuffer_size_callback(GLFWwindow* /*window*/, const int32_t width,
-                                   const int32_t height)
+    auto framebuffer_size_callback(GLFWwindow * /*window*/, const int32_t width,
+                                   const int32_t height) -> void
     {
         assert(width > 0);
         assert(height > 0);
@@ -22,7 +22,7 @@ namespace
         glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
     }
 
-    void process_input(GLFWwindow* window)
+    auto process_input(GLFWwindow *window) -> void
     {
         __assume(window != nullptr);
 
@@ -35,11 +35,10 @@ namespace
 } // namespace
 
 // PROGRESS:
-// https://learnopengl.com/Getting-started/Hello-Triangle#:~:text=you%20missed%20anything.-,Element%20Buffer%20Objects,-There%20is%20one
+// https://learnopengl.com/Getting-started/Shaders#:~:text=Our%20own%20shader%20class
 
-int32_t main()
+auto main() -> int32_t // NOLINT(bugprone-exception-escape)
 {
-    // NOLINT(bugprone-exception-escape)
     glfwInit();
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -49,7 +48,7 @@ int32_t main()
     constexpr auto width = 800;
     constexpr auto height = 600;
 
-    GLFWwindow* window = glfwCreateWindow(width, height, "LearnOpenGL", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(width, height, "LearnOpenGL", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << '\n';
@@ -59,11 +58,7 @@ int32_t main()
     __assume(window != nullptr);
     glfwMakeContextCurrent(window);
 
-    if (0 ==
-        gladLoadGLLoader(
-            reinterpret_cast<GLADloadproc>(glfwGetProcAddress) // NOLINT(clang-diagnostic-cast-function-type-strict)
-        )
-    )
+    if (0 == gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) // NOLINT
     {
         std::cout << "Failed to initialize GLAD" << '\n';
         return EXIT_FAILURE;
@@ -102,14 +97,15 @@ int32_t main()
     uint32_t vbo = 0;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), static_cast<const void*>(vertices.data()), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), static_cast<void*>(nullptr));
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), static_cast<const void *>(vertices.data()), GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), static_cast<void *>(nullptr));
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float),
-                          reinterpret_cast<void*>(3 * sizeof(float))); // NOLINT(performance-no-int-to-ptr)
+                          reinterpret_cast<void *>(3 * sizeof(float))); // NOLINT
+
     glEnableVertexAttribArray(1);
 
-    const auto* const vertex_shader_source = // language=glsl
+    const auto *const vertex_shader_source = // language=glsl
         "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;\n"
         "layout (location = 1) in vec3 aColor;\n"
@@ -136,7 +132,7 @@ int32_t main()
         return EXIT_FAILURE;
     }
 
-    const auto* const fragment_shader_source = // language=glsl
+    const auto *const fragment_shader_source = // language=glsl
         "#version 330 core\n"
         "out vec4 FragColor;\n"
         "in vec3 ourColor;\n"
@@ -173,10 +169,8 @@ int32_t main()
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    while (0 == glfwWindowShouldClose(window))
+    while (0 == glfwWindowShouldClose(window)) // NOLINT
     {
-        // NOLINT(altera-unroll-loops,
-        // altera-id-dependent-backward-branch)
         process_input(window);
         glClear(GL_COLOR_BUFFER_BIT);
 
