@@ -133,7 +133,7 @@ auto main() -> int32_t {
     glEnableVertexAttribArray(1);
 
     const auto program =
-        shader_program::builder::program_builder{}
+        shader_program::builder::ProgramBuilder{}
         .add_shader(
             GL_VERTEX_SHADER,
             "shaders/shader.vs.glsl")
