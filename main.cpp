@@ -88,19 +88,31 @@ auto main() -> int32_t {
     constexpr std::array<float, vertices_len> vertices = {
         // bottom right
         // v
-        0.5F, -0.5F, 0.0F,
+        0.5F,
+        -0.5F,
+        0.0F,
         // c
-        1.0F, 0.0F, 0.0F,
+        1.0F,
+        0.0F,
+        0.0F,
         // bottom left
         // v
-        -0.5F, -0.5F, 0.0F,
+        -0.5F,
+        -0.5F,
+        0.0F,
         // c
-        0.0F, 1.0F, 0.0F,
+        0.0F,
+        1.0F,
+        0.0F,
         // top
         // v
-        0.0F, 0.5F, 0.0F,
+        0.0F,
+        0.5F,
+        0.0F,
         // c
-        0.0F, 0.0F, 1.0F
+        0.0F,
+        0.0F,
+        1.0F
     };
 
     uint32_t vbo = 0;
@@ -136,11 +148,11 @@ auto main() -> int32_t {
         shader_program::builder::ProgramBuilder{}
         .add_shader(
             GL_VERTEX_SHADER,
-            "shaders/shader.vs.glsl")
-        ->add_shader(
+            "shaders/shader.vs.glsl"
+        )->add_shader(
             GL_FRAGMENT_SHADER,
-            "shaders/shader.fs.glsl")
-        ->build();
+            "shaders/shader.fs.glsl"
+        )->build();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

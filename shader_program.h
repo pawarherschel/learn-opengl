@@ -92,10 +92,10 @@ inline auto shader_program::builder::ProgramBuilder::add_shader(
         this->err_ = true;
         return this;
     }
-    std::stringstream contents_stringstream;
-    contents_stringstream << file_stream->rdbuf();
+    std::stringstream contents_string_stream;
+    contents_string_stream << file_stream->rdbuf();
 
-    const auto contents_string = contents_stringstream.str();
+    const auto contents_string = contents_string_stream.str();
     const auto contents = std::make_unique<const char*>(contents_string.c_str());
 
     auto success = 0;
@@ -131,7 +131,8 @@ inline auto shader_program::builder::ProgramBuilder::add_shader(
 
 inline auto shader_program::builder::ProgramBuilder::set_bool(
     const std::string& name,
-    const bool value) const -> void {
+    const bool value
+) const -> void {
     glUniform1i(
         glGetUniformLocation(this->program_id_, name.c_str()),
         static_cast<GLint>(value)
@@ -140,13 +141,15 @@ inline auto shader_program::builder::ProgramBuilder::set_bool(
 
 inline auto shader_program::builder::ProgramBuilder::set_int(
     const std::string& name,
-    const int value) const -> void {
+    const int value
+) const -> void {
     glUniform1i(glGetUniformLocation(this->program_id_, name.c_str()), value);
 }
 
 inline auto shader_program::builder::ProgramBuilder::set_float(
     const std::string& name,
-    const float value) const -> void {
+    const float value
+) const -> void {
     glUniform1f(glGetUniformLocation(this->program_id_, name.c_str()), value);
 }
 
