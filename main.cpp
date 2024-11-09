@@ -13,24 +13,24 @@
 //     ((min2) + ((value) - (min1)) * ((max2) - (min2)) / ((max1) - (min1)))
 
 namespace {
-auto framebuffer_size_callback(
-    GLFWwindow* /*window*/,
-    const int32_t width,
-    const int32_t height
-) -> void {
-    std::cout << "resizing viewport to width " << width << " height " << height
-        << '\n';
-    glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
-}
-
-auto process_input(GLFWwindow* window) -> void {
-    __assume(window != nullptr);
-
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        // ReSharper disable once CppRedundantCastExpression
-        glfwSetWindowShouldClose(window, static_cast<int>(true));
+    auto framebuffer_size_callback(
+        GLFWwindow* /*window*/,
+        const int32_t width,
+        const int32_t height
+    ) -> void {
+        std::cout << "resizing viewport to width " << width << " height " << height
+            << '\n';
+        glViewport(0, 0, static_cast<GLsizei>(width), static_cast<GLsizei>(height));
     }
-}
+
+    auto process_input(GLFWwindow* window) -> void {
+        __assume(window != nullptr);
+
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+            // ReSharper disable once CppRedundantCastExpression
+            glfwSetWindowShouldClose(window, static_cast<int>(true));
+        }
+    }
 } // namespace
 
 // PROGRESS:

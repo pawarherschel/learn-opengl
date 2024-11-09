@@ -14,67 +14,70 @@
 #include <string>
 
 namespace shader_program {
-class ShaderProgram {
-    uint32_t shader_id_;
-
-public:
-    explicit ShaderProgram(uint32_t shader_id);
-
-    auto use() const -> void;
-    auto set_bool(const std::string& name, bool value) const -> void;
-    auto set_int(const std::string& name, int value) const -> void;
-    auto set_float(const std::string& name, float value) const -> void;
-};
-
-inline ShaderProgram::ShaderProgram(const uint32_t shader_id):
-    shader_id_ { shader_id } {}
-
-inline auto ShaderProgram::use() const -> void {
-    glUseProgram(this->shader_id_);
-}
-
-inline auto ShaderProgram::set_bool(
-    const std::string& name,
-    const bool value
-) const -> void {
-    glUniform1i(
-        glGetUniformLocation(this->shader_id_, name.c_str()),
-        static_cast<GLint>(value)
-    );
-}
-
-inline auto ShaderProgram::set_int(
-    const std::string& name,
-    const int value
-) const -> void {
-    glUniform1i(glGetUniformLocation(this->shader_id_, name.c_str()), value);
-}
-
-inline auto ShaderProgram::set_float(
-    const std::string& name,
-    const float value
-) const -> void {
-    glUniform1f(glGetUniformLocation(this->shader_id_, name.c_str()), value);
-}
-
-namespace builder {
-    class ProgramBuilder {
-    private:
-        bool err_ { false };
-        uint32_t program_id_;
+    class ShaderProgram {
+        uint32_t shader_id_;
 
     public:
-        explicit ProgramBuilder():
-            program_id_ { glCreateProgram() } {}
+        explicit ShaderProgram(uint32_t shader_id);
 
-        auto add_shader(uint32_t shader_type, const std::string& shader_path) -> ProgramBuilder*;
+        auto use() const -> void;
         auto set_bool(const std::string& name, bool value) const -> void;
         auto set_int(const std::string& name, int value) const -> void;
         auto set_float(const std::string& name, float value) const -> void;
-
-        auto build() const -> ShaderProgram;
     };
-} // namespace builder
+
+    inline ShaderProgram::ShaderProgram(const uint32_t shader_id):
+        shader_id_ { shader_id } {}
+
+    inline auto ShaderProgram::use() const -> void {
+        glUseProgram(this->shader_id_);
+    }
+
+    inline auto ShaderProgram::set_bool(
+        const std::string& name,
+        const bool value
+    ) const -> void {
+        glUniform1i(
+            glGetUniformLocation(this->shader_id_, name.c_str()),
+            static_cast<GLint>(value)
+        );
+    }
+
+    inline auto ShaderProgram::set_int(
+        const std::string& name,
+        const int value
+    ) const -> void {
+        glUniform1i(glGetUniformLocation(this->shader_id_, name.c_str()), value);
+    }
+
+    inline auto ShaderProgram::set_float(
+        const std::string& name,
+        const float value
+    ) const -> void {
+        glUniform1f(glGetUniformLocation(this->shader_id_, name.c_str()), value);
+    }
+
+    namespace builder {
+        class ProgramBuilder {
+        private:
+            bool err_ { false };
+            uint32_t program_id_;
+
+        public:
+            explicit ProgramBuilder():
+                program_id_ { glCreateProgram() } {}
+
+            auto add_shader(
+                uint32_t shader_type,
+                const std::string& shader_path
+            ) -> ProgramBuilder*;
+            auto set_bool(const std::string& name, bool value) const -> void;
+            auto set_int(const std::string& name, int value) const -> void;
+            auto set_float(const std::string& name, float value) const -> void;
+
+            auto build() const -> ShaderProgram;
+        };
+    } // namespace builder
 } // namespace shader_program
 
 
