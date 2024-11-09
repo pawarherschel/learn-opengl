@@ -27,7 +27,7 @@ public:
 };
 
 inline ShaderProgram::ShaderProgram(const uint32_t shader_id):
-    shader_id_{ shader_id } {}
+    shader_id_ { shader_id } {}
 
 inline auto ShaderProgram::use() const -> void {
     glUseProgram(this->shader_id_);
@@ -60,12 +60,12 @@ inline auto ShaderProgram::set_float(
 namespace builder {
     class ProgramBuilder {
     private:
-        bool err_{ false };
+        bool err_ { false };
         uint32_t program_id_;
 
     public:
         explicit ProgramBuilder():
-            program_id_{ glCreateProgram() } {}
+            program_id_ { glCreateProgram() } {}
 
         auto add_shader(uint32_t shader_type, const std::string& shader_path) -> ProgramBuilder*;
         auto set_bool(const std::string& name, bool value) const -> void;
@@ -100,7 +100,7 @@ inline auto shader_program::builder::ProgramBuilder::add_shader(
 
     auto success = 0;
     constexpr auto info_log_buffer_size = 512;
-    std::array<char, info_log_buffer_size> info_log{};
+    std::array<char, info_log_buffer_size> info_log {};
 
     const auto shader_id = glCreateShader(shader_type);
     glShaderSource(shader_id, 1, &*contents, nullptr);
@@ -156,7 +156,7 @@ inline auto shader_program::builder::ProgramBuilder::set_float(
 inline auto shader_program::builder::ProgramBuilder::build() const -> ShaderProgram {
     assert(!this->err_);
 
-    return ShaderProgram{ this->program_id_ };
+    return ShaderProgram { this->program_id_ };
 }
 
 #endif

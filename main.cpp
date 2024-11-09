@@ -69,7 +69,7 @@ auto main() -> int32_t {
     glViewport(0, 0, width, height);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    constexpr std::array<float, 4> gl_clear_color{ 0.2F, 0.3F, 0.3F, 1.0F };
+    constexpr std::array<float, 4> gl_clear_color { 0.2F, 0.3F, 0.3F, 1.0F };
     glClearColor(
         gl_clear_color[0],
         gl_clear_color[1],
@@ -145,7 +145,7 @@ auto main() -> int32_t {
     glEnableVertexAttribArray(1);
 
     const auto program =
-        shader_program::builder::ProgramBuilder{}
+        shader_program::builder::ProgramBuilder {}
         .add_shader(
             GL_VERTEX_SHADER,
             "shaders/shader.vs.glsl"
