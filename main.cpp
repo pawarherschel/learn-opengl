@@ -61,10 +61,7 @@ auto main() -> int32_t {
     __assume(window != nullptr);
     glfwMakeContextCurrent(window);
 
-    if (0 == gladLoadGLLoader(
-            reinterpret_cast<GLADloadproc>(glfwGetProcAddress)
-        )
-    ) {
+    if (0 == gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cout << "Failed to initialize GLAD" << '\n';
         return EXIT_FAILURE;
     }
@@ -72,7 +69,7 @@ auto main() -> int32_t {
     glViewport(0, 0, width, height);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    constexpr std::array<float, 4> gl_clear_color{0.2F, 0.3F, 0.3F, 1.0F};
+    constexpr std::array<float, 4> gl_clear_color{ 0.2F, 0.3F, 0.3F, 1.0F };
     glClearColor(
         gl_clear_color[0],
         gl_clear_color[1],
@@ -131,7 +128,7 @@ auto main() -> int32_t {
         GL_FALSE,
         stride * sizeof(float),
         reinterpret_cast<void*>(3 * sizeof(float))
-    ); // NOLINT
+    );
 
     glEnableVertexAttribArray(1);
 
