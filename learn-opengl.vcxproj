@@ -139,10 +139,12 @@
     <ItemGroup>
         <ClCompile Include="glad.c"/>
         <ClCompile Include="main.cpp"/>
+        <ClCompile Include="stb_image.cpp"/>
     </ItemGroup>
     <ItemGroup>
         <ClInclude Include="main.h"/>
         <ClInclude Include="shader_program.h"/>
+        <ClInclude Include="stb_image.h"/>
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">

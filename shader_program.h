@@ -1,4 +1,4 @@
-﻿#pragma once // NOLINT(llvm-header-guard)
+﻿#pragma once
 
 #ifndef SHADER_H
 #define SHADER_H
